@@ -109,4 +109,5 @@ UserDetailsServiceImpl
 # Improvement
 
 Adding of Junit is a mandate but leaving it as such as of now cosnidering the time duration expected by this task is over.
-Addign negative scenarios handling
+Adding negative scenarios handling
+Adding Javadoc
