@@ -28,7 +28,7 @@ public class NoteService {
 	}
 
 	public void deleteNoteHolderByNoteAndUser(long note, long user) {
-		noteRepo.deleteNoteHolderByNoteAndUser(note, user);
+		noteRepo.deleteNoteHolderByIdAndUser(note, user);
 	}
 
 	public List<NoteHolder> getNotes(Long user) {

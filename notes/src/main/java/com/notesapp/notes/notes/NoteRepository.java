@@ -12,6 +12,6 @@ public interface NoteRepository extends JpaRepository<NoteHolder, Long> {
 	
 	public List<NoteHolder> findNoteHolderByUser(Long user);
 	public NoteHolder findNoteHolderByIdAndUser(Long note, Long user);
-	public void deleteNoteHolderByNoteAndUser(long note, long user);
+	public void deleteNoteHolderByIdAndUser(long note, long user);
 	
 }
