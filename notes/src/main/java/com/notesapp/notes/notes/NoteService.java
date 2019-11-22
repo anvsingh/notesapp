@@ -15,18 +15,29 @@ public class NoteService {
 	public void add(NoteHolderDTO dto, Long user) {
 		noteRepo.save(toEntity(dto, user));
 	}
-
-	public void delete(long id) {
-		noteRepo.deleteById(id);
+	
+	public void update(NoteHolderDTO dto, Long user, Long note) {
+		NoteHolder entity = noteRepo.findById(note).get();
+		if(entity!= null) {
+			entity.setNote(dto.getNote());
+			entity.setTitle(dto.getTitle());
+			noteRepo.save(entity);
+		}else {
+			noteRepo.save(toEntity(dto, user));
+		}
 	}
 
-	public List<NoteHolder> getNotes() {
-		return (List<NoteHolder>) noteRepo.findAll();
+	public void deleteNoteHolderByNoteAndUser(long note, long user) {
+		noteRepo.deleteNoteHolderByNoteAndUser(note, user);
 	}
 
-	public NoteHolder getNoteHolderById(long id) {
-        Optional<NoteHolder> optionalUser = noteRepo.findById(id);
-        return optionalUser.get();
+	public List<NoteHolder> getNotes(Long user) {
+		return (List<NoteHolder>) noteRepo.findNoteHolderByUser(user);
+	}
+
+	public NoteHolder getNoteHolderByUserAndNote(long note, long user) {
+        NoteHolder noteHolder = noteRepo.findNoteHolderByNoteAndUser(note, user);
+        return noteHolder;
     }
 
 	private NoteHolder toEntity(NoteHolderDTO dto, Long user) {

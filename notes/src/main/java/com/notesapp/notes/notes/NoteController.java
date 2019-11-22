@@ -12,28 +12,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user/")
+@RequestMapping("user/{user}")
 public class NoteController {
-	
-	@Autowired NoteService service;
 
-    @GetMapping("{user}/note")
-    public List<NoteHolder> getNotes() {
-        return service.getNotes();
-    }
+	@Autowired
+	NoteService service;
 
-    @PostMapping("{user}/note")
-    public void postNotes(@RequestBody NoteHolderDTO dto, @PathVariable("user") Long user) {
-        service.add(dto, user);
-    }
+	/**
+	 * Get all the notes for a user
+	 * 
+	 * @return List of NoteHolder for a User
+	 */
+	@GetMapping("/note")
+	public List<NoteHolder> getNotes(@PathVariable("user") Long user) {
+		return service.getNotes(user);
+	}
 
-    @GetMapping("/{user}/note/{note}")
-    public NoteHolder getById(@PathVariable(required = true) long user, @PathVariable(required = true) long note) {
-        return service.getNoteHolderById(user);
-    }
+	/**
+	 * Add a note for a user
+	 * 
+	 * @param dto  NoteHolderDTO
+	 * @param user user id
+	 */
+	@PostMapping("/note")
+	public void postNotes(@RequestBody NoteHolderDTO dto, @PathVariable("user") Long user) {
+		service.add(dto, user);
+	}
 
-    @DeleteMapping("/{id}/note")
-    public void delete(@PathVariable(required = true) long id) {
-        service.delete(id);
-    }
+	/**
+	 * Update a note for a user
+	 * 
+	 * @param dto  NoteHolderDTO
+	 * @param user user id
+	 */
+	@PostMapping("/note/{note}")
+	public void updateNote(@RequestBody NoteHolderDTO dto, @PathVariable("user") Long user,
+			@PathVariable("note") Long note) {
+		service.update(dto, user, note);
+	}
+
+	/**
+	 * 
+	 * @param user user id
+	 * @param note note id
+	 * @return particular NoteHodler for a user
+	 */
+	@GetMapping("/note/{note}")
+	public NoteHolder getById(@PathVariable(required = true) long user, @PathVariable(required = true) long note) {
+		return service.getNoteHolderByUserAndNote(user, note);
+	}
+
+	/**
+	 * Delete a note
+	 * @param user user id
+	 * @param note note id
+	 */
+	@DeleteMapping("/note/{note}")
+	public void delete(@PathVariable(required = true) long user, @PathVariable(required = true) long note) {
+		service.deleteNoteHolderByNoteAndUser(note, user);
+	}
 }
