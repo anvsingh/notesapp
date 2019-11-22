@@ -3,17 +3,18 @@ package com.notesapp.notes.users;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table
-@EnableJpaAuditing
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 	
 	private @Id @GeneratedValue Long id;
