@@ -35,8 +35,8 @@ public class NoteService {
 		return (List<NoteHolder>) noteRepo.findNoteHolderByUser(user);
 	}
 
-	public NoteHolder getNoteHolderByUserAndNote(long note, long user) {
-        NoteHolder noteHolder = noteRepo.findNoteHolderByNoteAndUser(note, user);
+	public NoteHolder getNoteHolderByUserAndNote(Long user, Long note) {
+        NoteHolder noteHolder = noteRepo.findNoteHolderByIdAndUser(note, user);
         return noteHolder;
     }
 

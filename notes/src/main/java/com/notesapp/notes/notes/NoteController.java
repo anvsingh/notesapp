@@ -58,7 +58,7 @@ public class NoteController {
 	 * @return particular NoteHodler for a user
 	 */
 	@GetMapping("/note/{note}")
-	public NoteHolder getById(@PathVariable(required = true) long user, @PathVariable(required = true) long note) {
+	public NoteHolder getById(@PathVariable(required = true) long user, @PathVariable(required = true) Long note) {
 		return service.getNoteHolderByUserAndNote(user, note);
 	}
 
