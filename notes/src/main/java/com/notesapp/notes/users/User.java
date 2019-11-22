@@ -2,12 +2,16 @@ package com.notesapp.notes.users;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+@Entity
+@Table
 public class User {
 	
 	private @Id @GeneratedValue Long id;
