@@ -27,8 +27,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {@Bean
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 	  
-	  http.authorizeRequests()
-      .antMatchers("/users").permitAll()
+	  http
+	  .csrf().disable().headers().frameOptions().sameOrigin().and()
+	  .authorizeRequests()
+      .antMatchers("/users/**").permitAll()
       .anyRequest().authenticated()
       .and()
       .httpBasic();

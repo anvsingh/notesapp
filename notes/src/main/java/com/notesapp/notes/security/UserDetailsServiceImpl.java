@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			builder = org.springframework.security.core.userdetails.User.withUsername(username);
 			builder.password(user.getPassword());
 			// Every user has only one role i.e to see own notes so not using roles.
-			//builder.roles("USER_ALLOWED");
+			builder.roles("USER_ALLOWED");
 		} else {
 			throw new UsernameNotFoundException("User not found.");
 		}
@@ -35,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private User findUserbyUername(String username) {
 		if (username != null) {
-			User user = userService.getUserById(Long.valueOf(username));
+			User user = userService.getUserByName(username);
 			if(user != null) {
 				User forSecurity = new User();
 				forSecurity.setEmail(user.getEmail());

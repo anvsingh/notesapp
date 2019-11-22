@@ -28,6 +28,11 @@ public class UserService {
         Optional<User> optionalUser = userRepo.findById(id);
         return optionalUser.get();
     }
+	
+	public User getUserByName(String email) {
+        User user = userRepo.getUserByEmail(email);
+        return user;
+    }
 
 	private User toEntity(UserDTO dto) {
 		User entity = new User();
